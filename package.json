@@ -1,0 +1,23 @@
+{
+  "name": "analizador-usando-peg-ale-fran",
+  "version": "1.0.0",
+  "description": "Analizador PDR usando PEG.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ULL-ESIT-PL-1617/analizador-usando-peg-ale-fran.git"
+  },
+  "keywords": [
+    "pegjs",
+    "pdr"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-PL-1617/analizador-usando-peg-ale-fran/issues"
+  },
+  "homepage": "https://github.com/ULL-ESIT-PL-1617/analizador-usando-peg-ale-fran#readme"
+}
