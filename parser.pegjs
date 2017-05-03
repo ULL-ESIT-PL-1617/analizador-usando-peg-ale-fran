@@ -1,105 +1,144 @@
 {
   const util = require('util');
   var tree = [];
+  var table = {}; //Table to store variables
 }
+//Rules
+start 'Statements'
+  = s:statement+ {
+                    if(s.length == 1){
+                      tree.push(s[0]);
+                    } else {
+                      s.forEach(function(item){
+                        tree.push(item);
+                      });
+                    }
+                    return tree;
+                  }
 
-start "Statements"
-  = s:statements {return s;}
+statement
+  = d:declaration {return d;}
+  / c:conditional {return c;}
+  / f:function    {return f;}
+  / l:loop        {return l;}
 
-statements "Statement"
-  = a:statement SEMICOLON s:(statement SEMICOLON)* {
-                                if(s.length == 0){
-                                  return a;
-                                } else {
-                                  tree.push(a);
-                                  s.forEach(function(item){
-                                    tree.push(item[0]);
-                                  });
-                                  return tree;
-                                }
-                              }
+declaration
+  = d:DECLARE id:ID e:(ASSIGN expression)? SEMICOLON {
+                                                        return {
+                                                          'type' : d,
+                                                          'left' : id,
+                                                          'right': (e == null) ? null : e[1]
+                                                        }
+                                                      }
+  / id:ID a:ASSIGN e:expression {
+                        return {
+                          'type' : a,
+                          'left' : id,
+                          'right': e
+                        }
+                      }
 
-statement "Declaration, condition, function, loop or expression"
-  = d:declaration { return d;}
-  / 'if'i c:condition LEFTBRACE s:statements RIGHTBRACE { return {"type":'IF', "left":c, "right":s}; }
-  / 'function'i id:ID? LEFTPAR a:arguments? RIGHTPAR LEFTBRACE s:statements RIGHTBRACE { return {"type":"FUNCTION", "id" : id, "args" : a, "value":s}}
-  / 'while'i c:condition LEFTBRACE s:statements RIGHTBRACE { return { "type":"WHILE", "left" : c, "right" : s};}
-  / expression
+conditional
+  = 'if'i c:condition b:block {
+                            return {
+                              'type' : 'Conditional',
+                              'left' : c,
+                              'right': b
+                            };
+                          }
 
-declaration "Declaration"
-  = d:DECLARE a:assign { return {"type" : d, "value": a}; }
-
-condition "Comparsion"
-  = LEFTPAR l:factor c:COMP r:factor RIGHTPAR { var result = { "type" : c.join(",").replace(/,/g,"").trim(), "value" : {"left":l, "right" : r}};
-                                                return util.inspect(result, {showHidden:true, depth : null});
-                                              }
-
-expression "Expression"
-  = t:term e:(ADDOP expression)* { if(e.length == 0){
-                                    return t;
-                                   } else {
-                                    //TODO
-                                   }
-                                 }
-
-term "Terminal"
-  = f:factor t:(MULOP term)* {
-                              if(t.length == 0) return f;
-                              else {
-                                //TODO
-                              }
+loop
+  = 'while'i c:condition b:block { 
+                                return {
+                                  'type': 'LOOP',
+                                  'left': c,
+                                  'right': b
+                                };
                              }
 
-arguments
-  = a:[a-z]i+ ar:(COMMA [a-z]i+)* { if(ar.length == 0) return a;
-                                    else{
-                                      let res = [];
-                                      res.push(a);
-                                      ar.forEach(function(p){
-                                        res.push(p[1]);
-                                      })
-                                      return res;
+function
+  = 'function'i id:ID? LEFTPAR p:parameters? RIGHTPAR b:block {
+                                                                return { 'type' : 'Function',
+                                                                         'parameters' : p,
+                                                                         'left' : id,
+                                                                         'right' : b
+                                                                        };
+                                                               }
+
+block
+  = LEFTBRACE s:statement+ RIGHTBRACE { return {'type' : 'block', 'value' : s};}
+
+parameters
+  = p:primary pa:(COMMA primary)* {
+                                    if(pa.length == 0)
+                                      return p;
+                                    else {
+                                      let params = [];
+                                      params.push(p);
+                                      pa.forEach(function(item){
+                                        params.push(item[1]);
+                                      });
+                                     return params;
                                     }
                                   }
 
-factor  "Factor"
- = n:NUM { return { "type" : 'NUM', "value" : n}; }
- / id:ID { return { "type" : 'ID', "value" : id}; }
- / LEFTBRACE e: expression RIGHTBRACE {return e;}
+condition
+  = LEFTPAR a:primary c:COMP b:primary RIGHTPAR {
+                                                  return {
+                                                    'type' : c,
+                                                    'left' : a,
+                                                    'right': b
+                                                   }
+                                                 }
 
+expression
+  = t:term e:(ADDOP expression)* {
+                                  if(e.length == 0){
+                                    return t;
+                                  } else {
+                                    let arr = e; //Array de arrays
+                                    return false;
+                                  }
+                                } //TODO
 
-assign "Assignments"
-  = id:ID EQ n:NUM { var left  = { "type" : 'ID', "value"  : id };
-                     var right = { "type" : "NUM", "value" : n };
-                     var result = { "left" : left, "right" : right };
-                     return util.inspect(result, {showHidden:true, depth : null});
-                   }
+term
+  = f:factor fa:(MULOP term)* {
+                                if(fa.length == 0){
+                                  return f;
+                                } else {
+                                  let arr = fa;
+                                  return false; //TODO
+                                }
+                              }
 
-  //Syntax
+factor
+  = LEFTPAR e:expression RIGHTPAR {return e;}
+  / p:primary {return p;}
 
-  _ = $[ \t\r\n]*                                             //Blancos
-  ID = _ id:$[a-zA-Z]i+ _   { return id;}                      //Identificadores
-  EQ = _"="_               { return '=';}
-  NUM = _ digits:$[0-9]+ _ { return parseInt(digits, 10); }
-  SEMICOLON = _";"_        { return ';'}
-  COMMA = _","_
-  DECLARE = _"var"_        { return 'VAR';}
-          / _"const"_      { return 'CONST';}
-  LEFTPAR = _"("_
-  RIGHTPAR = _")"_
-  LEFTBRACE = _"{"_
-  RIGHTBRACE = _"}"_
-  COMP = _ $([!=<>]"=") _
-       / _ c:[<>] _
+primary 'String or integer'
+  = id:ID   { return id; }
+  / n:NUM   { return n; }
 
-
-
-/* Reglas
-  * sentencias  --> (sentencia ';')*
-  * sentencia   --> declaración | condición | función | bucle | expresión
-  * bucle       --> 'WHILE (' comparación ') DO {' sentencias '}'
-  * expresión   --> terminal (ADDOP expresión)*
-  * terminal    --> factor (MULTOP terminal)*
-  * factor      --> '(' expresión ')' | NUM | ID
-  * asignación  --> ID '=' expresión
-  * comparación --> '(' expresión COMPARSION expresión ')'*/
+//////////////
+// Literals //
+//////////////
+_          = [ \t\n\r]*
+COMP       = _ c:$([!=<>]'=') _  { return c;}
+           / _ c:[<>] _  { return c;}
+ADDOP      = PLUS / MINUS
+MULOP      = MUL / DIV
+PLUS       = _'+'_ { return '+'; }
+MINUS      = _'-'_ { return '-'; }
+MUL        = _'*'_ { return '*'; }
+DIV        = _'/'_ { return '/'; }
+ASSIGN     = _'='_ { return '=';}
+SEMICOLON  = _';'_
+COMMA      = _','_
+LEFTPAR    = _'('_
+RIGHTPAR   = _')'_
+LEFTBRACE  = _'{'_
+RIGHTBRACE = _'}'_
+ID         = _ id:$[a-z]i+_     { return {'type' : 'ID', 'value' : id}; }
+NUM        = _ digits:$[0-9]+ _ { return {'type' : 'NUM', 'value' : parseInt(digits, 10)}; }
+DECLARE    = _ v:'var'i _       { return v; }
+           / _ c:'const'i _     { return c; }
