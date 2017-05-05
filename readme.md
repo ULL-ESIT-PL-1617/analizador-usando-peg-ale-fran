@@ -1,8 +1,13 @@
+[![Build Status](https://travis-ci.org/ULL-ESIT-PL-1617/analizador-usando-peg-ale-fran.svg?branch=master)](https://travis-ci.org/ULL-ESIT-PL-1617/analizador-usando-peg-ale-fran)
+
 ## Practica 07
   + Analizador PDR usando PEG.
-  + [Descripcion de la tarea](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicapegparser.html)
-  + [![Build Status](https://travis-ci.org/ULL-ESIT-PL-1617/analizador-usando-peg-ale-fran.svg?branch=master)](https://travis-ci.org/ULL-ESIT-PL-1617/analizador-usando-peg-ale-fran)
-  + [Code coverage](http://ULL-ESIT-PL-1617.github.io/analizador-usando-peg-ale-fran)
+  + [Descripcion de la tarea](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicapegparser.html)  
+  + [Recubrimiento del código](http://ULL-ESIT-PL-1617.github.io/analizador-usando-peg-ale-fran)
+
+## Tests & Coverage
+  ![test_cov](coverage_test.png)
+
 
 #### Gramática `pegjs-strip parser.pegjs`
 
@@ -95,11 +100,6 @@ function (i){
   }
 }
 ~~~
-
-## Tests & Coverage
-
-![test_cov](coverage_test.png)
-
 
 ## Colaboradores
   + [Francisco Palacios](http://franjpr.github.io)
