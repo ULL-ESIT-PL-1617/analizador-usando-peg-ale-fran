@@ -2,6 +2,8 @@
   const util = require('util');
   var tree = [];
   var table = {}; //Table to store variables
+  //Falta declarar funciones y hacer llamadas a funciones
+  // id ( ) ;
 }
 //Rules
 start 'Statements'
@@ -14,20 +16,37 @@ statement
   / l:loop        {return l;}
 
 declaration
-  = d:DECLARE id:ID e:(ASSIGN expression)? SEMICOLON {  
-                                                        return {
-                                                          'type' : d,
-                                                          'left' : id,
-                                                          'right': (e == null) ? null : e[1]
+  = d:DECLARE? id:ID e:(ASSIGN expression)? SEMICOLON {
+                                                        if(d == null){  //Definir
+                                                          return {
+                                                            'type' : (e == null) ? null : e[0],
+                                                            'left' : id,
+                                                            'right': e[1]
+                                                          }
+                                                        } else {    //Declarar
+                                                          return {
+                                                            'type' : d,
+                                                            'left' : id,
+                                                            'right': (e == null) ? null : e[1]
+                                                          }
                                                         }
                                                       }
-  / id:ID a:ASSIGN e:expression SEMICOLON{
-                                            return {
-                                              'type' : a,
-                                              'left' : id,
-                                              'right': e
+  / d:DECLARE? id:ID a:ASSIGN f:function {
+                                            if(d == null){  //Definir
+                                              return {
+                                                'type' : a,
+                                                'left' : id,
+                                                'right': f
+                                              }
+                                            } else {    //Declarar
+                                              return {
+                                                'type' : d,
+                                                'left' : id,
+                                                'right': f
+                                              }
                                             }
                                           }
+
 
 conditional
   = 'if'i c:condition b:block {

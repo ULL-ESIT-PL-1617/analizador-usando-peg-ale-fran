@@ -1,7 +1,7 @@
 var util = require("util");
 var PEG = require("./parser.js");
 //var input = "var kila = 42;"                    //Declarations
-//var input = "const k = 42; var k = 422;"                    //Declarations
+//var input = "const k = 42;  k = 422;"                    //Declarations
 //var input = "function () { var k = 33; }"                      //Function no param no id OK
 //var input = "function myfunc(f){ var k = 33;}"               //Function w1 param OK
 //var input = "function myfunc(f,g,h){ var k = 33;}"           //Function w+ param OK
@@ -11,10 +11,10 @@ var PEG = require("./parser.js");
 //var input = "while ( a == 5 ) { var k = 33; }";    //nested Condition OK
 //var input = 'i = 5 + 5';
 //var input = 'if (5 < a ) { a=a+3; a = 0;} const k = 33;'
-var input = `
+/*var input = `
             const MAX = 5;
             var i;
-            While ( i < MAX) {
+            While (i < MAX) {
               i = i + 1;
             }
 
@@ -23,7 +23,8 @@ var input = `
                   i = 0;
               }
             }
-            `;
+            `;*/
+var input = 'var myf = function(){ i = 0;}'
 console.log(`Processing <${input}>`);
 var r = PEG.parse(input);
 //console.log(util.inspect(r, {depth:null}));

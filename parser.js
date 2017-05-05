@@ -147,18 +147,34 @@ function peg$parse(input, options) {
       peg$c3 = function(c) {return c;},
       peg$c4 = function(f) {return f;},
       peg$c5 = function(l) {return l;},
-      peg$c6 = function(d, id, e) {  
-                                                              return {
-                                                                'type' : d,
-                                                                'left' : id,
-                                                                'right': (e == null) ? null : e[1]
+      peg$c6 = function(d, id, e) {
+                                                              if(d == null){  //Definir
+                                                                return {
+                                                                  'type' : (e == null) ? null : e[0],
+                                                                  'left' : id,
+                                                                  'right': e[1]
+                                                                }
+                                                              } else {    //Declarar
+                                                                return {
+                                                                  'type' : d,
+                                                                  'left' : id,
+                                                                  'right': (e == null) ? null : e[1]
+                                                                }
                                                               }
                                                             },
-      peg$c7 = function(id, a, e) {
-                                                  return {
-                                                    'type' : a,
-                                                    'left' : id,
-                                                    'right': e
+      peg$c7 = function(d, id, a, f) {
+                                                  if(d == null){  //Definir
+                                                    return {
+                                                      'type' : a,
+                                                      'left' : id,
+                                                      'right': f
+                                                    }
+                                                  } else {    //Declarar
+                                                    return {
+                                                      'type' : d,
+                                                      'left' : id,
+                                                      'right': f
+                                                    }
                                                   }
                                                 },
       peg$c8 = "if",
@@ -493,6 +509,9 @@ function peg$parse(input, options) {
 
     s0 = peg$currPos;
     s1 = peg$parseDECLARE();
+    if (s1 === peg$FAILED) {
+      s1 = null;
+    }
     if (s1 !== peg$FAILED) {
       s2 = peg$parseID();
       if (s2 !== peg$FAILED) {
@@ -538,16 +557,19 @@ function peg$parse(input, options) {
     }
     if (s0 === peg$FAILED) {
       s0 = peg$currPos;
-      s1 = peg$parseID();
+      s1 = peg$parseDECLARE();
+      if (s1 === peg$FAILED) {
+        s1 = null;
+      }
       if (s1 !== peg$FAILED) {
-        s2 = peg$parseASSIGN();
+        s2 = peg$parseID();
         if (s2 !== peg$FAILED) {
-          s3 = peg$parseexpression();
+          s3 = peg$parseASSIGN();
           if (s3 !== peg$FAILED) {
-            s4 = peg$parseSEMICOLON();
+            s4 = peg$parsefunction();
             if (s4 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c7(s1, s2, s3);
+              s1 = peg$c7(s1, s2, s3, s4);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -1711,6 +1733,8 @@ function peg$parse(input, options) {
     const util = require('util');
     var tree = [];
     var table = {}; //Table to store variables
+    //Falta declarar funciones y hacer llamadas a funciones
+    // id ( ) ;
 
 
   peg$result = peg$startRuleFunction();
