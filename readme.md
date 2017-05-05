@@ -1,6 +1,8 @@
 ## Practica 07
-  Analizador PDR usando PEG.
-  [Descripcion de la tarea](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicapegparser.html)
+  + Analizador PDR usando PEG.
+  + [Descripcion de la tarea](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicapegparser.html)
+  + [![Build Status](https://travis-ci.org/ULL-ESIT-PL-1617/analizador-usando-peg-ale-fran.svg?branch=master)](https://travis-ci.org/ULL-ESIT-PL-1617/analizador-usando-peg-ale-fran)
+  + [Code coverage](http://ULL-ESIT-PL-1617.github.io/analizador-usando-peg-ale-fran)
 
 #### Gramática `pegjs-strip parser.pegjs`
 
@@ -102,6 +104,3 @@ function (i){
 ## Colaboradores
   + [Francisco Palacios](http://franjpr.github.io)
   + [Alejandro Hernández](http://alehdezp.github.io)
-
-## Enlaces
-  + Coverage
