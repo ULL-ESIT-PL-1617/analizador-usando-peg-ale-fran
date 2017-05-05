@@ -24,5 +24,9 @@
     "chai": "^3.5.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.3.0"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4"
   }
 }
