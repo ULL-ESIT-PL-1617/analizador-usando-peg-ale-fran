@@ -142,21 +142,12 @@ function peg$parse(input, options) {
       peg$startRuleFunction  = peg$parsestart,
 
       peg$c0 = peg$otherExpectation("Statements"),
-      peg$c1 = function(s) {
-                          if(s.length == 1){
-                            tree.push(s[0]);
-                          } else {
-                            s.forEach(function(item){
-                              tree.push(item);
-                            });
-                          }
-                          return tree;
-                        },
+      peg$c1 = function(s) { return s; },
       peg$c2 = function(d) {return d;},
       peg$c3 = function(c) {return c;},
       peg$c4 = function(f) {return f;},
       peg$c5 = function(l) {return l;},
-      peg$c6 = function(d, id, e) {
+      peg$c6 = function(d, id, e) {  
                                                               return {
                                                                 'type' : d,
                                                                 'left' : id,
@@ -164,24 +155,24 @@ function peg$parse(input, options) {
                                                               }
                                                             },
       peg$c7 = function(id, a, e) {
-                              return {
-                                'type' : a,
-                                'left' : id,
-                                'right': e
-                              }
-                            },
+                                                  return {
+                                                    'type' : a,
+                                                    'left' : id,
+                                                    'right': e
+                                                  }
+                                                },
       peg$c8 = "if",
       peg$c9 = peg$literalExpectation("if", true),
       peg$c10 = function(c, b) {
-                                  return {
-                                    'type' : 'Conditional',
-                                    'left' : c,
-                                    'right': b
-                                  };
-                                },
+                                      return {
+                                        'type' : 'Conditional',
+                                        'left' : c,
+                                        'right': b
+                                      };
+                                    },
       peg$c11 = "while",
       peg$c12 = peg$literalExpectation("while", true),
-      peg$c13 = function(c, b) { 
+      peg$c13 = function(c, b) {
                                       return {
                                         'type': 'LOOP',
                                         'left': c,
@@ -218,20 +209,26 @@ function peg$parse(input, options) {
                                                          }
                                                        },
       peg$c20 = function(t, e) {
-                                        if(e.length == 0){
-                                          return t;
-                                        } else {
-                                          let arr = e; //Array de arrays
-                                          return false;
-                                        }
-                                      },
+                                           if(e.length == 0){
+                                             return t;
+                                           } else {
+                                             let arr = [];
+                                             e.forEach(function(item){
+                                               arr.push({type:item[0], left: t, right: item[1]});
+                                             });
+                                             return arr;
+                                           }
+                                        },
       peg$c21 = function(f, fa) {
-                                      if(fa.length == 0){
-                                        return f;
-                                      } else {
-                                        let arr = fa;
-                                        return false; //TODO
-                                      }
+                                       if(fa.length == 0){
+                                         return f;
+                                       } else {
+                                         let arr = [];
+                                         fa.forEach(function(item){
+                                           arr.push({type:item[0], left: f, right: item[1]});
+                                         });
+                                         return arr;
+                                       }
                                     },
       peg$c22 = function(e) {return e;},
       peg$c23 = function(p) {return p;},
@@ -547,9 +544,15 @@ function peg$parse(input, options) {
         if (s2 !== peg$FAILED) {
           s3 = peg$parseexpression();
           if (s3 !== peg$FAILED) {
-            peg$savedPos = s0;
-            s1 = peg$c7(s1, s2, s3);
-            s0 = s1;
+            s4 = peg$parseSEMICOLON();
+            if (s4 !== peg$FAILED) {
+              peg$savedPos = s0;
+              s1 = peg$c7(s1, s2, s3);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
           } else {
             peg$currPos = s0;
             s0 = peg$FAILED;

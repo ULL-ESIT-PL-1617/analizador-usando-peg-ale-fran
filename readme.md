@@ -1,5 +1,6 @@
 ## Practica 07
   Analizador PDR usando PEG.
+  [Descripcion de la tarea](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicapegparser.html)
 
 #### Gramática `pegjs-strip parser.pegjs`
 
@@ -15,7 +16,7 @@ statement
 
 declaration
   = DECLARE ID (ASSIGN expression)? SEMICOLON
-  / ID ASSIGN expression
+  / ID ASSIGN expression SEMICOLON
 
 conditional
   = 'if'i condition block
@@ -36,7 +37,8 @@ condition
   = LEFTPAR primary COMP primary RIGHTPAR
 
 expression
-  = term (ADDOP expression)*  //TODO
+  = term (ADDOP expression)*
+
 
 term
   = factor (MULOP term)*
@@ -74,10 +76,19 @@ DECLARE    = _ 'var'i _
            / _ 'const'i _
 ~~~
 
-## Ejemplos
+## Ejemplo
 ~~~
+const MAX = 5;
+var i;
+While ( i < MAX) {
+  i = i + 1;
+}
 
-
+function (i){
+  if(i == 5) {
+      i = 0;
+  }
+}
 ~~~
 
 ## Colaboradores

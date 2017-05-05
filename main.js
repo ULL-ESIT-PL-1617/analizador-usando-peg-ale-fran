@@ -9,8 +9,9 @@ var PEG = require("./parser.js");
 //var input = "if ( a == 5 ) { const k = 33; }";               //Condition OK
 //var input = "IF ( a > 5 ) { if (b<4) {const k = 33;} }";    //nested Condition OK
 //var input = "while ( a == 5 ) { var k = 33; }";    //nested Condition OK
-var input = 'i = 5 + 5';
-/*var input = `
+//var input = 'i = 5 + 5';
+//var input = 'if (5 < a ) { a=a+3; a = 0;} const k = 33;'
+var input = `
             const MAX = 5;
             var i;
             While ( i < MAX) {
@@ -22,7 +23,8 @@ var input = 'i = 5 + 5';
                   i = 0;
               }
             }
-            `;*/
+            `;
 console.log(`Processing <${input}>`);
 var r = PEG.parse(input);
-console.log(util.inspect(r, {depth:null}));
+//console.log(util.inspect(r, {depth:null}));
+console.log(JSON.stringify(r, null, 2));

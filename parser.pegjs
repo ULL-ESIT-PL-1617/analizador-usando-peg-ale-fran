@@ -5,16 +5,7 @@
 }
 //Rules
 start 'Statements'
-  = s:statement+ {
-                    if(s.length == 1){
-                      tree.push(s[0]);
-                    } else {
-                      s.forEach(function(item){
-                        tree.push(item);
-                      });
-                    }
-                    return tree;
-                  }
+  = s:statement+ { return s; }
 
 statement
   = d:declaration {return d;}
@@ -23,32 +14,32 @@ statement
   / l:loop        {return l;}
 
 declaration
-  = d:DECLARE id:ID e:(ASSIGN expression)? SEMICOLON {
+  = d:DECLARE id:ID e:(ASSIGN expression)? SEMICOLON {  
                                                         return {
                                                           'type' : d,
                                                           'left' : id,
                                                           'right': (e == null) ? null : e[1]
                                                         }
                                                       }
-  / id:ID a:ASSIGN e:expression {
-                        return {
-                          'type' : a,
-                          'left' : id,
-                          'right': e
-                        }
-                      }
+  / id:ID a:ASSIGN e:expression SEMICOLON{
+                                            return {
+                                              'type' : a,
+                                              'left' : id,
+                                              'right': e
+                                            }
+                                          }
 
 conditional
   = 'if'i c:condition b:block {
-                            return {
-                              'type' : 'Conditional',
-                              'left' : c,
-                              'right': b
-                            };
-                          }
+                                return {
+                                  'type' : 'Conditional',
+                                  'left' : c,
+                                  'right': b
+                                };
+                              }
 
 loop
-  = 'while'i c:condition b:block { 
+  = 'while'i c:condition b:block {
                                 return {
                                   'type': 'LOOP',
                                   'left': c,
@@ -93,22 +84,29 @@ condition
 
 expression
   = t:term e:(ADDOP expression)* {
-                                  if(e.length == 0){
-                                    return t;
-                                  } else {
-                                    let arr = e; //Array de arrays
-                                    return false;
+                                     if(e.length == 0){
+                                       return t;
+                                     } else {
+                                       let arr = [];
+                                       e.forEach(function(item){
+                                         arr.push({type:item[0], left: t, right: item[1]});
+                                       });
+                                       return arr;
+                                     }
                                   }
-                                } //TODO
+
 
 term
   = f:factor fa:(MULOP term)* {
-                                if(fa.length == 0){
-                                  return f;
-                                } else {
-                                  let arr = fa;
-                                  return false; //TODO
-                                }
+                                 if(fa.length == 0){
+                                   return f;
+                                 } else {
+                                   let arr = [];
+                                   fa.forEach(function(item){
+                                     arr.push({type:item[0], left: f, right: item[1]});
+                                   });
+                                   return arr;
+                                 }
                               }
 
 factor
