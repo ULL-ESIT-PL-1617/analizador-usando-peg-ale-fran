@@ -1,10 +1,3 @@
-{
-  const util = require('util');
-  var tree = [];
-  var table = {}; //Table to store variables
-  //Falta declarar funciones y hacer llamadas a funciones
-  // id ( ) ;
-}
 //Rules
 start 'Statements'
   = s:statement+ { return s; }

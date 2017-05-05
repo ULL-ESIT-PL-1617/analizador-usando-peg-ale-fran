@@ -43,7 +43,6 @@ condition
 expression
   = term (ADDOP expression)*
 
-
 term
   = factor (MULOP term)*
 
@@ -95,10 +94,14 @@ function (i){
 }
 ~~~
 
+## Tests & Coverage
+
+![test_cov](coverage_test.png)
+
+
 ## Colaboradores
   + [Francisco Palacios](http://franjpr.github.io)
   + [Alejandro Hernández](http://alehdezp.github.io)
 
 ## Enlaces
-  + Heroku
-  + Tests
+  + Coverage

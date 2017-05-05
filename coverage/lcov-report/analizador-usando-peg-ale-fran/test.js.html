@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for analizador-usando-peg-ale-fran\test.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">analizador-usando-peg-ale-fran/</a> test.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>54/54</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>14/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>54/54</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var chai = require('chai');
+var PEG = require('./parser.js');
+var expect = chai.expect;
+&nbsp;
+function removeSpaces(str){
+  return str.replace(/\s/g,'');;
+}
+&nbsp;
+describe("Aritmethics expressions", function () {
+  it("# a = 5 + 5", function(){
+    let tree = `[{"type": "=", "left": {"type": "ID", "value": "a"}, "right": [{"type": "+", "left":
+                  {"type": "NUM", "value": 5}, "right": {"type": "NUM", "value": 5} }] }]
+                `;
+    tree = removeSpaces(tree);
+    let res = removeSpaces(JSON.stringify(PEG.parse('a = 5 + 5;'), null, 2))
+    expect(res).to.equal(tree);
+  });
+  it("# a = 5 * 5 - 10", function(){
+    let tree = `[{"type": "=", "left": {"type": "ID","value": "a" },"right": [{"type": "-","left": [{
+                "type": "*","left": { "type": "NUM", "value": 5},"right": {"type": "NUM", "value": 5}
+                }],"right": {"type": "NUM", "value": 10} } ]}]
+                `;
+    tree = removeSpaces(tree);
+    let res = removeSpaces(JSON.stringify(PEG.parse('a = 5 * 5 - 10;'), null, 2))
+    expect(res).to.equal(tree);
+  });
+});
+&nbsp;
+describe("Declaring &amp; defining variables", function () {
+  it("# var myvar = 33;", function(){
+    let tree = `[{"type": "var","left": {  "type": "ID", "value": "myvar"}, "right": { "type": "NUM",  "value": 33 }}]  `;
+    tree = removeSpaces(tree);
+    let res = removeSpaces(JSON.stringify(PEG.parse('var myvar = 33;'), null, 2))
+    expect(res).to.equal(tree);
+  });
+  it("# const MAX;", function(){
+    let tree = `[{"type": "const","left": {  "type": "ID", "value": "MAX"}, "right": null}] `;
+    tree = removeSpaces(tree);
+    let res = removeSpaces(JSON.stringify(PEG.parse('const MAX;'), null, 2))
+    expect(res).to.equal(tree);
+  });
+});
+&nbsp;
+describe("Declaring, defining &amp; calling functions", function () {
+  it("# var myfunc = function () { var k = 33; }", function(){
+    let tree = `[{"type": "var","left": {"type": "ID","value": "myfunc"},"right": {"type": "Function", "parameters": null,
+                "left": null, "right": { "type": "block", "value": [{"type": "var", "left": {"type": "ID","value": "k"},
+                "right": { "type": "NUM",  "value": 33  }  }  ]  } } }]                `;
+    tree = removeSpaces(tree);
+    let res = removeSpaces(JSON.stringify(PEG.parse('var myfunc = function () { var k = 33; }'), null, 2))
+    expect(res).to.equal(tree);
+  });
+  it("# function myFunction(p,c) { var k = 33; }", function(){
+    let tree = `[{ "type": "Function","parameters": [ { "type": "ID", "value": "p"}, {"type": "ID","value": "c" }],
+              "left": {"type": "ID", "value": "myFunction" },"right": { "type": "block", "value": [ { "type": "var",
+              "left": { "type": "ID","value": "k" }, "right": {   "type": "NUM",     "value": 33        }}]}}]`;
+    tree = removeSpaces(tree);
+    let res = removeSpaces(JSON.stringify(PEG.parse('function myFunction(p,c) { var k = 33; }'), null, 2))
+    expect(res).to.equal(tree);
+  });
+  it("# myFunction(a,b,c);", function(){
+    let tree = `[{"type": "CALL","parameters": [ { "type": "ID", "value": "a" }, { "type": "ID",  "value": "b"
+  }, { "type": "ID", "value": "c"  }  ],  "id": {    "type": "ID",   "value": "myFunction"   }}]`;
+    tree = removeSpaces(tree);
+    let res = removeSpaces(JSON.stringify(PEG.parse('myFunction(a,b,c);'), null, 2))
+    expect(res).to.equal(tree);
+  });
+});
+&nbsp;
+describe("Conditonals and loops", function () {
+  it("# if ( a == 5 ) { var b = 0; }", function(){
+    let tree = `[{ "type": "Conditional", "left": {  "type": "==",  "left": {     "type": "ID",    "value": "a"      },
+                "right": {    "type": "NUM",   "value": 5  }},"right": { "type": "block", "value": [   {   "type": "var",
+                "left": {"type": "ID",    "value": "b"       },     "right": {     "type": "NUM", "value": 0}}]}}]`;
+    tree = removeSpaces(tree);
+    let res = removeSpaces(JSON.stringify(PEG.parse('if ( a == 5 ) { var b = 0; }'), null, 2))
+    expect(res).to.equal(tree);
+  });
+  it("# while ( a != 5 ) { var a = a + 1; }", function(){
+    let tree = `[{"type": "LOOP","left": {"type": "!=", "left": { "type": "ID","value": "a" },"right": {"type": "NUM", "value": 5
+                } },"right": {"type": "block","value": [ { "type": "var", "left": { "type": "ID", "value": "a"},"right": [
+                  { "type": "+",     "left": {  "type": "ID",  "value": "a" }, "right": {"type": "NUM", "value": 1}}]}]}}]`;
+    tree = removeSpaces(tree);
+    let res = removeSpaces(JSON.stringify(PEG.parse('while ( a != 5 ) { var a = a + 1; }'), null, 2))
+    expect(res).to.equal(tree);
+  });
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri May 05 2017 17:03:15 GMT+0100 (Hora de verano GMT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
