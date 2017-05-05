@@ -13,10 +13,11 @@ statement
   / conditional
   / function
   / loop
+  / call
 
 declaration
-  = DECLARE ID (ASSIGN expression)? SEMICOLON
-  / ID ASSIGN expression SEMICOLON
+  = DECLARE? ID (ASSIGN expression)? SEMICOLON
+  / DECLARE? ID ASSIGN function
 
 conditional
   = 'if'i condition block
@@ -26,6 +27,9 @@ loop
 
 function
   = 'function'i ID? LEFTPAR parameters? RIGHTPAR block
+
+call
+  = ID LEFTPAR parameters? RIGHTPAR SEMICOLON
 
 block
   = LEFTBRACE statement+ RIGHTBRACE

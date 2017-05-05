@@ -24,7 +24,8 @@ var PEG = require("./parser.js");
               }
             }
             `;*/
-var input = 'var myf = function(){ i = 0;}'
+//var input = 'var myf = function(){ i = 0;}'
+var input = 'myfunc(5,h);'
 console.log(`Processing <${input}>`);
 var r = PEG.parse(input);
 //console.log(util.inspect(r, {depth:null}));

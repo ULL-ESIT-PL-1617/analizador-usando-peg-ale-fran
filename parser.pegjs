@@ -14,6 +14,7 @@ statement
   / c:conditional {return c;}
   / f:function    {return f;}
   / l:loop        {return l;}
+  / c:call        {return c;}
 
 declaration
   = d:DECLARE? id:ID e:(ASSIGN expression)? SEMICOLON {
@@ -74,6 +75,14 @@ function
                                                                          'right' : b
                                                                         };
                                                                }
+call
+  = id:ID LEFTPAR p:parameters? RIGHTPAR SEMICOLON {
+                                                      return  {
+                                                                'type':'CALL',
+                                                                'parameters': p,
+                                                                'id': id,
+                                                              }
+                                                   }
 
 block
   = LEFTBRACE s:statement+ RIGHTBRACE { return {'type' : 'block', 'value' : s};}
